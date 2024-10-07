@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.p3.setOnClickListener {
             binding.p3.setImageResource(R.drawable.image3)
-        }
+        }   //nah
     }
 }
 
