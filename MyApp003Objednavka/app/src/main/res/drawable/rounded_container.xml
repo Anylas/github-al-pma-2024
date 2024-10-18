@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/green"/> <!--  background -->
+    <corners android:radius="18dp" /> <!-- Zaoblené rohy -->
+    <stroke android:width="2dp" android:color="@color/lightshadow"/> <!-- Optional border -->
+</shape>

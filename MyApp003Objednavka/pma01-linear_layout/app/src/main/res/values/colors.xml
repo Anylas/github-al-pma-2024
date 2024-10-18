@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="myColor1">##f57d05</color>
+    <color name="myColor2">##0551f5</color>
+    <color name="myColor3">#E20E1C</color>
+    <color name="myColor4">#f5056d</color>
+    <color name="myColor5">#9C27B0</color>
+    <color name="myTextColor">#FF5722</color> <!-- Oranžová barva -->
+</resources>
