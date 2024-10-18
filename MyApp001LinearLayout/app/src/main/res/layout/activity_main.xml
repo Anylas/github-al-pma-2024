@@ -67,7 +67,8 @@
             android:minLines="3"
             android:textAlignment="center"
             android:textColor='@color/myColor5'
-            android:textSize="30dp"
+            android:textSize="30dp">
+        </TextView>
 
 
     </LinearLayout>
