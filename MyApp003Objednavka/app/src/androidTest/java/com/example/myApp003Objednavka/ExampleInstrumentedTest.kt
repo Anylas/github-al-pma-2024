@@ -1,4 +1,4 @@
-package com.example.myobjednavka03
+package com.example.myApp003Objednavka
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,9 +1,10 @@
-package com.example.myobjednavka03
+package com.example.myApp003Objednavka
 
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myobjednavka03.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.myobjednavka03
+package com.example.myApp003Objednavka
 
 import org.junit.Test
 
