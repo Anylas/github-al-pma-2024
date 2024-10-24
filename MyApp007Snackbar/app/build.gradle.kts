@@ -15,7 +15,12 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+    dataBinding{
+        enable=true
+    }
+    viewBinding{
+        enable=true
+    }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
