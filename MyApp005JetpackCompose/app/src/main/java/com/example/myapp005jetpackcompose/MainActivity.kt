@@ -140,17 +140,18 @@ fun ComposeExample() {
                 Button(
                     onClick = {
                         // dáme proměnné
-                        fun fillDefaultValues(): String {
-                        val firstName = name.ifBlank  { "Nikdo" }
-                        val lastName = surname.ifBlank { "Nijaký" }
-                        val Eemail = email.ifBlank { "nikdo.nijaky@android.com" }
-                        val phoneNumber = phone.ifBlank { "101010101" }
-                        val ageValue = age.ifBlank { "100" }
-                        val conectedDevices = devices.ifBlank { "0" }
-                        val livingPlace = place.ifBlank { "České republice" }
-                        resultText = "Jmenuji se $name $surname. Je mi $age let a moje bydliště je $place. Můj email je $email a telefonní číslo je následující $phone. Připojených zařízení k tomuto účtu mám celkem $devices."
-
-                              }, },
+                        val nameIb = name.ifBlank  { "Nikdo" }
+                        val surnameIb = surname.ifBlank { "Nijaký" }
+                        val emailIb = email.ifBlank { "nikdo.nijaky@android.com" }
+                        val phoneIb = phone.ifBlank { "101010101" }
+                        val ageIb = age.ifBlank { "100" }
+                        val devicesIb = devices.ifBlank { "0" }
+                        val placeIb = place.ifBlank { "České republice" }
+                        resultText = "Jmenuji se $nameIb $surnameIb. Je mi $ageIb let " +
+                                "a moje bydliště je $placeIb. Můj email je $emailIb " +
+                                "a telefonní číslo je následující $phoneIb. Připojených zařízení " +
+                                "k tomuto účtu mám celkem $devicesIb."
+                    },
                     modifier = Modifier.weight(1f)
                 ) {
                     Text("Odeslat")
