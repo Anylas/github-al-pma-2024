@@ -1,4 +1,3 @@
-// MainActivity.kt
 package com.example.myapp011adastore
 
 import android.os.Bundle

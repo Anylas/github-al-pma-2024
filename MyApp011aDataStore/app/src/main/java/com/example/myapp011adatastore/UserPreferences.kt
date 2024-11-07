@@ -34,7 +34,6 @@ fun Context.getUser(): Flow<User> {
         User(name, age, isAdult)
     }
 }
-
 // Model pro uchovávání dat
 data class User(val name: String, val age: Int, val isAdult: Boolean)
 
