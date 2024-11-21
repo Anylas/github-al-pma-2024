@@ -16,7 +16,7 @@ interface TagDao {
 
     // Aktualizuje existující štítek
     @Update
-    suspend fun update(tag: Tag)
+    suspend fun update(tag: Tag) //provádí refresh databáze, velmi důležité mít zde!
 
     // Smaže zadaný štítek
     @Delete
