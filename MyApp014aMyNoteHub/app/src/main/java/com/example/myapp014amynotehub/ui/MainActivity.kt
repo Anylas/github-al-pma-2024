@@ -185,23 +185,49 @@ class MainActivity : AppCompatActivity() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_add_note, null)
         val titleEditText = dialogView.findViewById<EditText>(R.id.editTextTitle)
         val contentEditText = dialogView.findViewById<EditText>(R.id.editTextContent)
+        val spinnerCategory = dialogView.findViewById<Spinner>(R.id.spinnerCategory)
+
 
         // Předvyplnění stávajících dat poznámky
         titleEditText.setText(note.title)
         contentEditText.setText(note.content)
 
-        val dialog = AlertDialog.Builder(this) //naplní se ta funkce, refresh v databázi
+        // Načtení kategorií z databáze a přednastavení aktuální kategorie
+        lifecycleScope.launch {
+            val categories = database.categoryDao().getAllCategories().first()
+            val categoryNames = categories.map { it.name }
+            val adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, categoryNames)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerCategory.adapter = adapter
+
+            // Nastavení aktuální kategorie poznámky jako výchozí hodnoty Spinneru
+            val currentCategory = categories.find { it.id == note.categoryId }
+            val currentCategoryIndex = categoryNames.indexOf(currentCategory?.name)
+            if (currentCategoryIndex >= 0) {
+                spinnerCategory.setSelection(currentCategoryIndex)
+            }
+        }
+
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Upravit poznámku")
             .setView(dialogView)
-            .setPositiveButton("Uložit") { _, _ -> //vložení stringů
+            .setPositiveButton("Uložit") { _, _ ->
                 val updatedTitle = titleEditText.text.toString()
                 val updatedContent = contentEditText.text.toString()
+                val selectedCategoryName = spinnerCategory.selectedItem.toString()
 
-                // Aktualizace poznámky v databázi
+                // Najdeme ID vybrané kategorie
                 lifecycleScope.launch {
-                    val updatedNote = note.copy(title = updatedTitle, content = updatedContent)
-                    database.noteDao().update(updatedNote)  // Uloží aktualizovanou poznámku, volá se třída noteDao, zavolá se update
-                    loadNotes()  // Načte a aktualizuje seznam poznámek
+                    val selectedCategory = database.categoryDao().getCategoryByName(selectedCategoryName)
+                    if (selectedCategory != null) {
+                        val updatedNote = note.copy(
+                            title = updatedTitle,
+                            content = updatedContent,
+                            categoryId = selectedCategory.id
+                        )
+                        database.noteDao().update(updatedNote) // Aktualizace poznámky v databázi
+                        loadNotes() // Aktualizace seznamu poznámek
+                    }
                 }
             }
             .setNegativeButton("Zrušit", null)
@@ -231,7 +257,9 @@ class MainActivity : AppCompatActivity() {
         setupFilterSpinner()
         setupSortButtons()
     }
-
+//Spinner pro výběr kategorie:
+//Stejně jako u přidávání poznámky, načítáme kategorie z databáze.
+//Nastavíme předvybranou kategorii podle aktuální poznámky.
     private fun setupFilterSpinner() {
         lifecycleScope.launch {
             val categories = database.categoryDao().getAllCategories().first()
