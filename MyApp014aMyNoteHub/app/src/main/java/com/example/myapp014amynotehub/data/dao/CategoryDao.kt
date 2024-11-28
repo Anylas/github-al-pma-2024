@@ -1,10 +1,11 @@
-package com.example.myapp014amynotehub
+package com.example.myapp014amynotehub.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
+import com.example.myapp014amynotehub.data.model.Category
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -25,4 +26,17 @@ interface CategoryDao {
     // Načte všechny kategorie a vrátí je jako Flow
     @Query("SELECT * FROM category_table ORDER BY name ASC")
     fun getAllCategories(): Flow<List<Category>>
+
+    // Najde kategorii podle jejího názvu
+    @Query("SELECT * FROM category_table WHERE name = :name LIMIT 1")
+    suspend fun getCategoryByName(name: String): Category?
+
+    // Najde kategorii podle ID
+    @Query("SELECT * FROM category_table WHERE id = :categoryId LIMIT 1")
+    suspend fun getCategoryById(categoryId: Int): Category?
+
+    // vymaže všechny možnosti kategorií z tabulky
+    @Query("DELETE FROM category_table")
+    fun deleteAllCategories()
+
 }

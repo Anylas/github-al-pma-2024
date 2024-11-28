@@ -1,6 +1,5 @@
-package com.example.myapp014amynotehub
+package com.example.myapp014amynotehub.data.model
 
-import android.icu.text.CaseMap.Title
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

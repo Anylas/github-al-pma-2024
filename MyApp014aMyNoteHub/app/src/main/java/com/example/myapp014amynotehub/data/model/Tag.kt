@@ -1,4 +1,4 @@
-package com.example.myapp014amynotehub
+package com.example.myapp014amynotehub.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

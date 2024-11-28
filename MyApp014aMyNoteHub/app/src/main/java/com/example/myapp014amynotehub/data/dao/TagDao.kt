@@ -1,10 +1,11 @@
-package com.example.myapp014amynotehub
+package com.example.myapp014amynotehub.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
+import com.example.myapp014amynotehub.data.model.Tag
 import kotlinx.coroutines.flow.Flow
 
 @Dao
