@@ -13,8 +13,6 @@ import com.example.myapp015sharedtasklist.databinding.ActivityMainBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 
-
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val tasks = mutableListOf<Task>() // Lokální seznam úkolů
@@ -103,22 +101,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addTask(name: String) {
-        val newTask = Task(
-            id = firestore.collection("tasks").document().id, // Vygenerujeme ID
-            name = name,
-            isCompleted = false,
-            assignedTo = ""
-        )
+        firestore.collection("tasks")
+            .whereEqualTo("name", name)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (documents.isEmpty) {
+                    // Pokud úloha neexistuje, vytvoříme ji
+                    val newTask = Task(
+                        id = firestore.collection("tasks").document().id,
+                        name = name,
+                        isCompleted = false,
+                        assignedTo = ""
+                    )
 
         // Uložíme úkol do Firestore
-        firestore.collection("tasks").document(newTask.id).set(newTask)
-            .addOnSuccessListener {
-                tasks.add(newTask)
-                taskAdapter.notifyItemInserted(tasks.size - 1)
-                println("Task added to Firestore: $name")
+                    firestore.collection("tasks").document(newTask.id).set(newTask)
+                        .addOnSuccessListener {
+                            tasks.add(newTask)
+                            taskAdapter.notifyItemInserted(tasks.size - 1)
+                            println("Task added to Firestore: $name")
+                        }
+                        .addOnFailureListener { e ->
+                            println("Error adding task: ${e.message}")
+                        }
+                } else {
+                    println("Task with name '$name' already exists.")
+                }
             }
             .addOnFailureListener { e ->
-                println("Error adding task: ${e.message}")
+                println("Error checking task existence: ${e.message}")
             }
     }
 
