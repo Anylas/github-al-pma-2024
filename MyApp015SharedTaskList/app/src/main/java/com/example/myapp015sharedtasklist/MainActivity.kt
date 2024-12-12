@@ -25,10 +25,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializace RecyclerView
-        taskAdapter = TaskAdapter(tasks) { task ->
-            updateTask(task) // Callback pro změnu úkolu
-        }
+        // Inicializace RecyclerView+ úprava možnosti přidání jména/přezdívky k úkolu
+        taskAdapter = TaskAdapter(tasks,
+            onTaskChecked = { task -> updateTask(task) },
+            onNameAssigned = { task -> updateTask(task) }
+        )
         binding.recyclerViewTasks.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewTasks.adapter = taskAdapter
 
@@ -70,9 +71,14 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    private fun updateTask(task: Task) {
-                // Tady později napojíme Firestore update
-                println("Task updated: ${task.name}, completed: ${task.isCompleted}")
+    private fun updateTask(task: Task) { //logika pro aktualizaci dat Firebase
+        firestore.collection("tasks").document(task.id).set(task)
+            .addOnSuccessListener {
+                println("Task updated in Firestore: ${task.name}")
+            }
+            .addOnFailureListener { e ->
+                println("Error updating task: ${e.message}")
+            }
     }
 
     private fun showAddTaskDialog() {
