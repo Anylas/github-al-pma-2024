@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">VanocniAplikace017</string>
+    <!-- Pole citátů pro kalendář -->
+    <string-array name="quotes">
+    <item>„První citát: Užijte si dnešní den!“</item>
+    <item>„Druhý citát: Zkus být k někomu laskavý!“</item>
+    <item>„Třetí citát: Udělej si chvilku pro sebe.“</item>
+    <item>„Čtvrtý citát: Naplánuj něco krásného na Vánoce.“</item>
+    <item>„Pátý citát: Zkus připravit oblíbené cukroví.“</item>
+    <item>„Šestý citát: Ozdob si stromeček nebo dům.“</item>
+    <item>„Sedmý citát: Zavolej příteli nebo rodině.“</item>
+    <item>„Osmý citát: Zastav se a užij si chvíli klidu.“</item>
+    <item>„Devátý citát: Udělej si seznam vánočních přání.“</item>
+    </string-array>
+</resources>
