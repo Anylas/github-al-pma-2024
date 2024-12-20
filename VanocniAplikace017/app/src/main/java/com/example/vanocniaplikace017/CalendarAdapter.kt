@@ -1,5 +1,6 @@
 package com.example.vanocniaplikace017
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,10 @@ class CalendarAdapter(
             binding.tvDayNumber.text = item.day.toString()
             binding.root.isEnabled = item.isUnlocked
             binding.root.alpha = if (item.isUnlocked) 1.0f else 0.5f
-            binding.root.setOnClickListener { onItemClick(item) }
+            binding.root.setOnClickListener {
+                Log.d("CalendarAdapter", "Klik na den: ${item.day}, Zvuk ID: ${item.soundResId}")
+                onItemClick(item)
+            }
         }
     }
 

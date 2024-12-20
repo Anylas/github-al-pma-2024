@@ -1,31 +1,30 @@
 package com.example.vanocniaplikace017
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.vanocniaplikace017.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val calendarItems = generateCalendarItems()
     private var mediaPlayer: MediaPlayer? = null // Globální MediaPlayer pro přehrávání hudby
-
+    private lateinit var calendarItems: List<DayItem>
     private var currentDayItem: DayItem? = null // Uloží aktuálně vybraný den
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        calendarItems = generateCalendarItems()
         setContentView(binding.root)
 
         // Nastavení RecyclerView
@@ -34,6 +33,9 @@ class MainActivity : AppCompatActivity() {
             handleDayItemClick(dayItem)
         }
 
+        // Na začátku jsou tlačítka skrytá
+        hideMusicButtons()
+
         // Nastavení tlačítek Přehrát a Zastavit
         binding.playButton.setOnClickListener {
             currentDayItem?.soundResId?.let { playMusic(it) }
@@ -41,9 +43,6 @@ class MainActivity : AppCompatActivity() {
         binding.stopButton.setOnClickListener {
             stopMusic()
         }
-
-        // Na začátku jsou tlačítka skrytá
-        hideMusicButtons()
     }
 
     private fun handleDayItemClick(dayItem: DayItem) {
@@ -58,11 +57,19 @@ class MainActivity : AppCompatActivity() {
     private fun showDayContent(dayItem: DayItem) {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_content, null)
         val imageView = dialogView.findViewById<ImageView>(R.id.imageViewTree)
+        val quoteTextView = dialogView.findViewById<TextView>(R.id.quoteTextView)
 
-        // Spustí animaci vánočního stromku
-        imageView.setBackgroundResource(R.drawable.tree_animation)
-        val animationDrawable = imageView.background as AnimationDrawable
-        animationDrawable.start()
+        // Nastavení citátu
+        quoteTextView.text = dayItem.content
+
+        // Pokud je nastaven strom, spustí animaci
+        if (dayItem.showTree) {
+            imageView.setBackgroundResource(R.drawable.tree_animation)
+            val animationDrawable = imageView.background as AnimationDrawable
+            animationDrawable.start()
+        } else {
+            imageView.setBackgroundResource(0) // Žádný strom, odstraníme pozadí
+        }
 
         AlertDialog.Builder(this)
             .setView(dialogView)
@@ -77,11 +84,15 @@ class MainActivity : AppCompatActivity() {
             .create()
             .show()
 
-        // Zobrazí tlačítka při otevření dialogu
-        showMusicButtons(dayItem)
+        // Zobrazí tlačítka při otevření dialogu, pokud má den přiřazený zvuk
+        if (dayItem.soundResId != null) {
+            showMusicButtons(dayItem)
+        }
     }
 
+
     private fun showMusicButtons(dayItem: DayItem) {
+        Log.d("MainActivity", "Zobrazuji tlačítka pro den: ${dayItem.day}, Zvuk ID: ${dayItem.soundResId}")
         binding.playButton.visibility = Button.VISIBLE
         binding.stopButton.visibility = Button.VISIBLE
 
@@ -100,10 +111,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun playMusic(soundResId: Int) {
         stopMusic() // Zastaví případnou předchozí hudbu
+        Log.d("MainActivity", "Přehrávám zvuk s ID: $soundResId")
         mediaPlayer = MediaPlayer.create(this, soundResId)
         mediaPlayer?.start()
 
-        // Hudba se zastaví automaticky po dokončení
         mediaPlayer?.setOnCompletionListener {
             stopMusic()
         }
@@ -130,12 +141,13 @@ class MainActivity : AppCompatActivity() {
             DayItem(
                 day = day + 1,
                 isUnlocked = day + 1 <= today,
-                content = quotes[day],
-                soundResId = when (day) {
-                    0 -> R.raw.song1
-                    1 -> R.raw.song2
+                content = quotes[day], // Unikátní citát pro každý den
+                soundResId = when (day + 1) { // Zvuk pro konkrétní dny
+                    5 -> R.raw.song1
+                    18 -> R.raw.song2
                     else -> null
-                }
+                },
+                showTree = day + 1 == 5 || day + 1 == 18 // Stromek pro dny 5 a 18
             )
         }
     }
