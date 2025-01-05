@@ -32,17 +32,6 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = CalendarAdapter(calendarItems) { dayItem ->
             handleDayItemClick(dayItem)
         }
-
-        // Na začátku jsou tlačítka skrytá
-        hideMusicButtons()
-
-        // Nastavení tlačítek Přehrát a Zastavit
-        binding.playButton.setOnClickListener {
-            currentDayItem?.soundResId?.let { playMusic(it) }
-        }
-        binding.stopButton.setOnClickListener {
-            stopMusic()
-        }
     }
 
     private fun handleDayItemClick(dayItem: DayItem) {
@@ -58,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_content, null)
         val imageView = dialogView.findViewById<ImageView>(R.id.imageViewTree)
         val quoteTextView = dialogView.findViewById<TextView>(R.id.quoteTextView)
+        val playButton = dialogView.findViewById<Button>(R.id.playButton)
+        val stopButton = dialogView.findViewById<Button>(R.id.stopButton)
 
         // Nastavení citátu
         quoteTextView.text = dayItem.content
@@ -71,42 +62,30 @@ class MainActivity : AppCompatActivity() {
             imageView.setBackgroundResource(0) // Žádný strom, odstraníme pozadí
         }
 
+        // Nastavení tlačítek přehrávání a zastavení
+        if (dayItem.day == 2 || dayItem.day == 12) {
+            playButton.visibility = Button.VISIBLE
+            stopButton.visibility = Button.VISIBLE
+
+            playButton.setOnClickListener {
+                dayItem.soundResId?.let { playMusic(it) }
+            }
+            stopButton.setOnClickListener {
+                stopMusic()
+            }
+        } else {
+            playButton.visibility = Button.GONE
+            stopButton.visibility = Button.GONE
+        }
+
         AlertDialog.Builder(this)
             .setView(dialogView)
-            .setPositiveButton("Sdílet") { _, _ ->
-                shareContent(dayItem.content) // Sdílení obsahu
-            }
             .setNeutralButton("Zavřít") { dialog, _ ->
                 dialog.dismiss()
-                hideMusicButtons() // Schová tlačítka po zavření
                 stopMusic() // Zastaví hudbu
             }
             .create()
             .show()
-
-        // Zobrazí tlačítka při otevření dialogu, pokud má den přiřazený zvuk
-        if (dayItem.soundResId != null) {
-            showMusicButtons(dayItem)
-        }
-    }
-
-
-    private fun showMusicButtons(dayItem: DayItem) {
-        Log.d("MainActivity", "Zobrazuji tlačítka pro den: ${dayItem.day}, Zvuk ID: ${dayItem.soundResId}")
-        binding.playButton.visibility = Button.VISIBLE
-        binding.stopButton.visibility = Button.VISIBLE
-
-        binding.playButton.setOnClickListener {
-            dayItem.soundResId?.let { playMusic(it) }
-        }
-        binding.stopButton.setOnClickListener {
-            stopMusic()
-        }
-    }
-
-    private fun hideMusicButtons() {
-        binding.playButton.visibility = Button.GONE
-        binding.stopButton.visibility = Button.GONE
     }
 
     private fun playMusic(soundResId: Int) {
@@ -126,13 +105,6 @@ class MainActivity : AppCompatActivity() {
         mediaPlayer = null
     }
 
-    private fun shareContent(content: String) {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, content)
-        startActivity(Intent.createChooser(intent, "Sdílet obsah přes:"))
-    }
-
     private fun generateCalendarItems(): List<DayItem> {
         val quotes = resources.getStringArray(R.array.quotes)
         val today = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH)
@@ -143,8 +115,8 @@ class MainActivity : AppCompatActivity() {
                 isUnlocked = day + 1 <= today,
                 content = quotes[day], // Unikátní citát pro každý den
                 soundResId = when (day + 1) { // Zvuk pro konkrétní dny
-                    5 -> R.raw.song1
-                    18 -> R.raw.song2
+                    2 -> R.raw.song1
+                    5 -> R.raw.song2
                     else -> null
                 },
                 showTree = day + 1 == 5 || day + 1 == 18 // Stromek pro dny 5 a 18
