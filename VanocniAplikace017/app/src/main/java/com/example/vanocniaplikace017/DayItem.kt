@@ -7,5 +7,10 @@ data class DayItem(
     val soundResId: Int? = null,
     val showTree: Boolean = false,
     val showPresent: Boolean = false,
-    val showValasi: Boolean = false
+    val showValasi: Boolean = false,
+    val showWish: Boolean = false,
+    val showUklid: Boolean = false,
+    val showStedry: Boolean = false,
+    val showPresent1: Boolean = false
+
 )

@@ -15,7 +15,7 @@
         android:layout_marginBottom="16dp"
         android:scaleType="centerInside" />
 
-    <!-- Dáreček -->
+    <!-- Dáreček 1 -->
     <ImageView
         android:id="@+id/imageViewPresent"
         android:layout_width="wrap_content"
@@ -28,6 +28,38 @@
         android:id="@+id/imageValasi"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerInside"/>
+
+    <!-- Merry X-mas -->
+    <ImageView
+        android:id="@+id/imageWish"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerInside"/>
+
+    <!-- Úklid -->
+    <ImageView
+        android:id="@+id/imageUklid"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerInside"/>
+
+    <!-- Dáreček 2 -->
+    <ImageView
+        android:id="@+id/imagepresent1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerInside"/>
+
+    <!-- Štedrý den obrázek -->
+    <ImageView
+        android:id="@+id/imageStedry"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:layout_marginBottom="16dp"
         android:scaleType="centerInside"/>
 

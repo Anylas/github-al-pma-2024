@@ -50,7 +50,11 @@ class MainActivity : AppCompatActivity() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_content, null)
         val imageTree = dialogView.findViewById<ImageView>(R.id.imageViewTree)
         val imagePresent = dialogView.findViewById<ImageView>(R.id.imageViewPresent)
+        val imagePresent1 = dialogView.findViewById<ImageView>(R.id.imagepresent1)
+        val imageUklid = dialogView.findViewById<ImageView>(R.id.imageUklid)
         val imageValasi = dialogView.findViewById<ImageView>(R.id.imageValasi)
+        val imageWish = dialogView.findViewById<ImageView>(R.id.imageWish)
+        val imageStedry = dialogView.findViewById<ImageView>(R.id.imageStedry)
         val quoteTextView = dialogView.findViewById<TextView>(R.id.quoteTextView)
         val playButton = dialogView.findViewById<Button>(R.id.playButton)
         val stopButton = dialogView.findViewById<Button>(R.id.stopButton)
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         quoteTextView.text = dayItem.content
 
 
-        // Pokud je nastaven strom, spustí animaci
+        // Animace stromu
         if (dayItem.showTree) {
             imageTree.setBackgroundResource(R.drawable.tree_animation)
             imageTree.visibility = ImageView.VISIBLE
@@ -70,13 +74,22 @@ class MainActivity : AppCompatActivity() {
             imageTree.visibility = ImageView.GONE
         }
 
-        // Pokud je nastaven dárek, zobrazí se obrázek
+        // Obrázek dárečku 1
         if (dayItem.showPresent) {
             imagePresent.setBackgroundResource(R.drawable.frame22)
             imagePresent.visibility = ImageView.VISIBLE
         } else {
             imagePresent.visibility = ImageView.GONE
             imagePresent.setBackgroundResource(0) // Žádný dárek, žádné pozadí
+        }
+
+        // Obrázek dárečku 2
+        if (dayItem.showPresent1) {
+            imagePresent1.setBackgroundResource(R.drawable.darek1)
+            imagePresent1.visibility = ImageView.VISIBLE
+        } else {
+            imagePresent1.visibility = ImageView.GONE
+            imagePresent1.setBackgroundResource(0) // Žádný dárek, žádné pozadí
         }
 
         // Valaši
@@ -88,8 +101,35 @@ class MainActivity : AppCompatActivity() {
             imageValasi.visibility = ImageView.GONE
         }
 
+        // Obrázek Merry X-mas
+        if (dayItem.showWish) {
+            imageWish.setBackgroundResource(R.drawable.imagewish)
+            imageWish.visibility = ImageView.VISIBLE
+        } else {
+            imageWish.setBackgroundResource(0)
+            imageWish.visibility = ImageView.GONE
+        }
+
+        // Obrázek úklid
+        if (dayItem.showUklid) {
+            imageUklid.setBackgroundResource(R.drawable.uklid)
+            imageUklid.visibility = ImageView.VISIBLE
+        } else {
+            imageUklid.setBackgroundResource(0)
+            imageUklid.visibility = ImageView.GONE
+        }
+
+        // obrázek Štedrého dne
+        if (dayItem.showStedry) {
+            imageStedry.setBackgroundResource(R.drawable.stedry)
+            imageStedry.visibility = ImageView.VISIBLE
+        } else {
+            imageStedry.setBackgroundResource(0)
+            imageStedry.visibility = ImageView.GONE
+        }
+
         // Nastavení tlačítek přehrávání a zastavení
-        if (dayItem.day == 2 || dayItem.day == 23 || dayItem.day == 5 || dayItem.day == 9 || dayItem.day == 15 || dayItem.day == 23) {
+        if (dayItem.day == 2 || dayItem.day == 23 || dayItem.day == 5 || dayItem.day == 9 || dayItem.day == 15 ) {
             playButton.visibility = Button.VISIBLE
             stopButton.visibility = Button.VISIBLE
 
@@ -133,12 +173,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun generateCalendarItems(): List<DayItem> {
         val quotes = resources.getStringArray(R.array.quotes)
+        val calendar = java.util.Calendar.getInstance()
         val today = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH)
-
+        val currentMonth = calendar.get(java.util.Calendar.MONTH)
         return List(24) { day ->
             DayItem(
                 day = day + 1,
-                isUnlocked = day + 1 <= today,
+                isUnlocked = if (currentMonth == java.util.Calendar.DECEMBER) {
+                    // V prosinci kontrolujeme den
+                    day + 1 <= today
+                } else {
+                    // Mimo prosinec jsou všechna okénka odemčená
+                    true
+                },
                 content = quotes[day], // Unikátní citát pro každý den
                 soundResId = when (day + 1) { // Zvuk pro konkrétní dny
                     2 -> R.raw.song1
@@ -149,9 +196,13 @@ class MainActivity : AppCompatActivity() {
 
                     else -> null
                 },
-                showTree = day + 1 == 22 || day + 1 == 4, // Stromek pro dny 22 a 11
-                showPresent = day + 1 == 3 || day + 1 == 14, // Dárek pro dny 6 a 14
-                showValasi = day + 1 == 2 || day + 1 == 12
+                showTree = day + 1 == 22 || day + 1 == 4, // Stromek pro dny 22 a 4
+                showPresent = day + 1 == 14, // Dárek pro 14 den
+                showValasi = day + 1 == 2 || day + 1 == 12, // Valaši pro dny 2 a 12
+                showUklid = day + 1 == 21, // Obrázek úklidu pro den 21
+                showStedry = day + 1 == 24, // Obrázek štedrého dne pro den 24
+                showWish = day + 1 == 15,  // Obrázek Merry X-mas pro 15 den
+                showPresent1 = day + 1 == 8 || day + 1 == 3 // Dárek pro 8 a 3 den
             )
         }
     }
