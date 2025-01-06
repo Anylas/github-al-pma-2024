@@ -150,6 +150,9 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
                 stopMusic() // Zastaví hudbu
             }
+            .setPositiveButton("Sdílet") { _, _ ->
+                shareContent(currentDayItem?.content ?: "Sdílení obsahu není k dispozici.")
+            }
             .create()
             .show()
     }
@@ -210,5 +213,13 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         stopMusic() // Zastaví hudbu při zničení aktivity
+    }
+
+    private fun shareContent(content: String) {
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain" // Typ obsahu: text
+            putExtra(Intent.EXTRA_TEXT, content) // Obsah ke sdílení
+        }
+        startActivity(Intent.createChooser(shareIntent, "Sdílet pomocí")) // Nabídka výběru aplikace pro sdílení
     }
 }
