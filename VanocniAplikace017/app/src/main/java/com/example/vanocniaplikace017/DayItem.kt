@@ -5,5 +5,7 @@ data class DayItem(
     val isUnlocked: Boolean = false,
     val content: String = "",
     val soundResId: Int? = null,
-    val showTree: Boolean = false
+    val showTree: Boolean = false,
+    val showPresent: Boolean = false,
+    val showValasi: Boolean = false
 )

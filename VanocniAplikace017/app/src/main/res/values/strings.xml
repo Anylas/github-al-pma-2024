@@ -1,30 +1,30 @@
 <resources>
     <string name="app_name">VanocniAplikace017</string>
-    <!-- Pole citátů pro kalendář -->
+    <!-- Pole citátů/textů pro kalendář -->
     <string-array name="quotes">
-    <item>„První citát: Užijte si dnešní den!“</item>
-    <item>„Druhý citát: Zkus být k někomu laskavý!“</item>
-    <item>„Třetí citát: Udělej si chvilku pro sebe.“</item>
-    <item>„Čtvrtý citát: Naplánuj něco krásného na Vánoce.“</item>
-    <item>„Pátý citát: Zkus připravit oblíbené cukroví.“</item>
-    <item>„Šestý citát: Ozdob si stromeček nebo dům.“</item>
-    <item>„Sedmý citát: Zavolej příteli nebo rodině.“</item>
-    <item>„Osmý citát: Zastav se a užij si chvíli klidu.“</item>
-    <item>„Devátý citát: Udělej si seznam vánočních přání.“</item>
-        <item>„Desátý citát: Vánoce nejsou jen časem, jsou stavem mysli."</item>
-        <item>„Jedenáctý citát: Ať vaše Vánoce zahřejí vaše srdce stejně jako šálek horkého kakaa v zimě."</item>
-        <item>„Dvanáctý citát: Každý vánoční stromek je krásný, když pod ním najdeme lásku."</item>
-        <item>„Třináctý citát: Nezapomeňte, že nejdůležitějším dárkem je přítomnost – přítomnost vás samotných."</item>
-        <item>„Čtrnáctý citát: Vánoce jsou kouzlem, které nám připomíná, že dávání je krásnější než přijímání."</item>
-        <item>„Patnáctý citát: Šťastné a veselé Vánoce jsou vždy o lidech, kteří je s námi sdílí."</item>
-        <item>„Šestnáctý citát: Děti vidí Vánoce v blikajících světýlkách, dospělí v blikajících očích."</item>
-        <item>„Sedmnáctý citát: Vánoce nejsou o tom, co najdeme pod stromečkem, ale koho najdeme kolem něj."</item>
-        <item>„Osmnáctý citát: Největší dar, který můžeme o Vánocích dát, je čas strávený s těmi, které máme rádi."</item>
-        <item>„Devatenáctý citát: Ať jsou vaše Vánoce plné světla, lásky a radosti!"</item>
-        <item>„Dvacátý citát: Udělejte si chvilku s rodinou a pusťe si vánoční pohádky"</item>
-        <item>„Dvacátý první citát: Upečte si vánoční rolku"</item>
-        <item>„Dvacátý druhý citát: Ukliď si pokoj"</item>
-        <item>„Dvacátý třetí citát: Umyj okna"</item>
-        <item>„Dvacátý čtvrtý citát: Udělej překvapení v podobě snídaně pro tvoji rodinu"</item>
+    <item>„Užijte si dnešní den!“</item>
+    <item>„Zkus být k někomu laskavý!“</item>
+    <item>„Naplánuj něco krásného na Vánoce.“</item>
+    <item>„Zkus připravit oblíbené cukroví.“</item>
+    <item>„Ozdob si stromeček nebo dům.“</item>
+    <item>„Zavolej příteli nebo rodině.“</item>
+    <item>„Zastav se a užij si chvíli klidu.“</item>
+    <item>„Udělej si seznam vánočních přání.“</item>
+        <item>„Vánoce nejsou jen časem, jsou stavem mysli."</item>
+        <item>„Ať vaše Vánoce zahřejí vaše srdce stejně jako šálek horkého kakaa v zimě."</item>
+        <item>„Každý vánoční stromek je krásný, když pod ním najdeme lásku."</item>
+        <item>„Nezapomeňte, že nejdůležitějším dárkem je přítomnost – přítomnost vás samotných."</item>
+        <item>„Vánoce jsou kouzlem, které nám připomíná, že dávání je krásnější než přijímání."</item>
+        <item>„Šťastné a veselé Vánoce jsou vždy o lidech, kteří je s námi sdílí."</item>
+        <item>„Děti vidí Vánoce v blikajících světýlkách, dospělí v blikajících očích."</item>
+        <item>„Vánoce nejsou o tom, co najdeme pod stromečkem, ale koho najdeme kolem něj."</item>
+        <item>„Největší dar, který můžeme o Vánocích dát, je čas strávený s těmi, které máme rádi."</item>
+        <item>„Ať jsou vaše Vánoce plné světla, lásky a radosti!"</item>
+        <item>„Udělejte si chvilku s rodinou a pusťe si vánoční pohádky"</item>
+        <item>„Upečte si vánoční rolku"</item>
+        <item>„Ukliď si pokoj"</item>
+        <item>„Umyj okna"</item>
+        <item>„Zkus si vzpomenout na své mrtvé příbuzné a zajít na hřbitov"</item>
+        <item>„Udělej překvapení v podobě snídaně pro tvoji rodinu"</item>
     </string-array>
 </resources>

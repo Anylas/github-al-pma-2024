@@ -3,15 +3,18 @@ package com.example.vanocniaplikace017
 import android.os.Bundle
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
+import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.vanocniaplikace017.databinding.ActivityMainBinding
 
@@ -45,7 +48,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showDayContent(dayItem: DayItem) {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_content, null)
-        val imageView = dialogView.findViewById<ImageView>(R.id.imageViewTree)
+        val imageTree = dialogView.findViewById<ImageView>(R.id.imageViewTree)
+        val imagePresent = dialogView.findViewById<ImageView>(R.id.imageViewPresent)
+        val imageValasi = dialogView.findViewById<ImageView>(R.id.imageValasi)
         val quoteTextView = dialogView.findViewById<TextView>(R.id.quoteTextView)
         val playButton = dialogView.findViewById<Button>(R.id.playButton)
         val stopButton = dialogView.findViewById<Button>(R.id.stopButton)
@@ -53,17 +58,38 @@ class MainActivity : AppCompatActivity() {
         // Nastavení citátu
         quoteTextView.text = dayItem.content
 
+
         // Pokud je nastaven strom, spustí animaci
         if (dayItem.showTree) {
-            imageView.setBackgroundResource(R.drawable.tree_animation)
-            val animationDrawable = imageView.background as AnimationDrawable
+            imageTree.setBackgroundResource(R.drawable.tree_animation)
+            imageTree.visibility = ImageView.VISIBLE
+            val animationDrawable = imageTree.background as AnimationDrawable
             animationDrawable.start()
         } else {
-            imageView.setBackgroundResource(0) // Žádný strom, odstraníme pozadí
+            imageTree.setBackgroundResource(0) // Žádný strom, žádné pozadí
+            imageTree.visibility = ImageView.GONE
+        }
+
+        // Pokud je nastaven dárek, zobrazí se obrázek
+        if (dayItem.showPresent) {
+            imagePresent.setBackgroundResource(R.drawable.frame22)
+            imagePresent.visibility = ImageView.VISIBLE
+        } else {
+            imagePresent.visibility = ImageView.GONE
+            imagePresent.setBackgroundResource(0) // Žádný dárek, žádné pozadí
+        }
+
+        // Valaši
+        if (dayItem.showValasi) {
+            imageValasi.setBackgroundResource(R.drawable.imagevalasi)
+            imageValasi.visibility = ImageView.VISIBLE
+        } else {
+            imageValasi.setBackgroundResource(0)
+            imageValasi.visibility = ImageView.GONE
         }
 
         // Nastavení tlačítek přehrávání a zastavení
-        if (dayItem.day == 2 || dayItem.day == 12) {
+        if (dayItem.day == 2 || dayItem.day == 23 || dayItem.day == 5 || dayItem.day == 9 || dayItem.day == 15 || dayItem.day == 23) {
             playButton.visibility = Button.VISIBLE
             stopButton.visibility = Button.VISIBLE
 
@@ -117,9 +143,15 @@ class MainActivity : AppCompatActivity() {
                 soundResId = when (day + 1) { // Zvuk pro konkrétní dny
                     2 -> R.raw.song1
                     5 -> R.raw.song2
+                    9 -> R.raw.song3
+                    15 -> R.raw.song4
+                    23 -> R.raw.song5
+
                     else -> null
                 },
-                showTree = day + 1 == 5 || day + 1 == 18 // Stromek pro dny 5 a 18
+                showTree = day + 1 == 22 || day + 1 == 4, // Stromek pro dny 22 a 11
+                showPresent = day + 1 == 3 || day + 1 == 14, // Dárek pro dny 6 a 14
+                showValasi = day + 1 == 2 || day + 1 == 12
             )
         }
     }
