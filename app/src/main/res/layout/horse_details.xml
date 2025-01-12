@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/horseNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jméno: "
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/horseBoxTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Box: "
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/horseAgeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Věk: "
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Tlačítko Zpět -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="Zpět"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp" />
+
+</LinearLayout>
