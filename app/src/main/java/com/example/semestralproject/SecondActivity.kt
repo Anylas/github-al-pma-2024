@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.semestralproject.ui.horses.DatabaseHorses
+import java.util.Calendar
 
 class SecondActivity : AppCompatActivity() {
 
@@ -26,13 +27,15 @@ class SecondActivity : AppCompatActivity() {
         val backButton = findViewById<Button>(R.id.backButton)
 
         // Získání aktuálního dne
-        val currentDate = java.util.Calendar.getInstance()
+        val currentDate = Calendar.getInstance()
 
-        // Nastavení maximálního a minimálního data
-        val minDate = (currentDate.clone() as java.util.Calendar).apply {
-            add(java.util.Calendar.DAY_OF_MONTH, -2) // 2 dny zpět
+        // Nastavení minimálního a maximálního data
+        val minDate = (currentDate.clone() as Calendar).apply {
+            add(Calendar.DAY_OF_MONTH, -2) // 2 dny zpět
         }
-        val maxDate = currentDate // Dnešní datum
+        val maxDate = (currentDate.clone() as Calendar).apply {
+            add(Calendar.DAY_OF_MONTH, 1) // dnešní datum
+        }
 
         // Nastavení omezení pro DatePicker
         datePicker.minDate = minDate.timeInMillis
@@ -40,18 +43,18 @@ class SecondActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             val description = activityDescription.text.toString()
-            val selectedDate = java.util.Calendar.getInstance().apply {
+            val selectedDate = Calendar.getInstance().apply {
                 set(datePicker.year, datePicker.month, datePicker.dayOfMonth)
             }
 
             val selectedHorse = horseNameButton.text.toString()
             val selectedUser = userNameButton.text.toString()
 
-            // Kontrola, zda je vybrané datum v povoleném rozsahu
+            // Kontrola, zda je vybrané datum platné
             if (selectedDate.before(minDate) || selectedDate.after(maxDate)) {
                 Toast.makeText(
                     this,
-                    "Vyber datum maximálně 2 dny zpět.",
+                    "Vyber datum mezi dnešním dnem a maximálně 2 dny zpět.",
                     Toast.LENGTH_SHORT
                 ).show()
             } else if (description.isBlank() || selectedHorse == "Vyber koně" || selectedUser == "Vyber jezdce") {
@@ -73,17 +76,15 @@ class SecondActivity : AppCompatActivity() {
 
                     // Nastavení aktuálního data jako výchozího v kalendáři
                     datePicker.updateDate(
-                        currentDate.get(java.util.Calendar.YEAR),
-                        currentDate.get(java.util.Calendar.MONTH),
-                        currentDate.get(java.util.Calendar.DAY_OF_MONTH)
+                        currentDate.get(Calendar.YEAR),
+                        currentDate.get(Calendar.MONTH),
+                        currentDate.get(Calendar.DAY_OF_MONTH)
                     )
-
                 } else {
                     Toast.makeText(this, "Nepodařilo se uložit aktivitu. Zkontroluj data.", Toast.LENGTH_LONG).show()
                 }
             }
         }
-
 
         // Akce pro tlačítko "Zpět"
         backButton.setOnClickListener {
@@ -111,5 +112,4 @@ class SecondActivity : AppCompatActivity() {
             userNamesDialog.show()
         }
     }
-
 }
