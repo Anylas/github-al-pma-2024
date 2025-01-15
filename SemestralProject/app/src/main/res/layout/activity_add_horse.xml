@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Pozadí aktivity s obrázkem -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/horseground" />
+
+    <!-- Obsah obrazovky -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/horseNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Jméno koně"
+            android:textColorHint="@color/black"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/horseBoxEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Číslo boxu"
+            android:textColorHint="@color/black"
+            android:layout_marginBottom="16dp"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/horseAgeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Věk koně"
+            android:textColorHint="@color/black"
+            android:layout_marginBottom="16dp"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/saveHorseButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:text="Přidat koně"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button"
+            android:text="Zpět"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</FrameLayout>

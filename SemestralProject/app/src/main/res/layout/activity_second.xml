@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/horsebackground2">
+
+    <!-- DatePicker pro výběr data -->
+
+    <!-- EditText pro popis aktivity -->
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="match_parent"
+        android:layout_height="407dp"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:calendarTextColor="@color/black" />
+
+    <EditText
+        android:id="@+id/activityDescription"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:hint="Popiš aktivitu s koníkem"
+        android:textColor="@color/black" />
+
+    <!-- Tlačítko pro výběr koně -->
+    <Button
+        android:id="@+id/selectHorseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:text="Vyberte koně"
+        android:textColor="@color/black" />
+
+    <!-- Tlačítko pro výběr uživatele -->
+
+    <Button
+        android:id="@+id/selectUserButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:text="Vyberte uživatele"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
+
+        <!-- Tlačítko Zrušit -->
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/rounded_button"
+            android:text="Zpět"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/rounded_button"
+            android:text="Uložit změny"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:gravity="center" />
+
+    </LinearLayout>
+</LinearLayout>

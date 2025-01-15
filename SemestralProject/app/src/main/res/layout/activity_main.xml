@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/horsebackground" />
+
+    <!-- Hlavní nadpis aplikace -->
+    <TextView
+        android:id="@+id/appTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:text="Stájový asistent"
+        android:textSize="36sp"
+        android:textColor="#FFFFFF"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:background="@drawable/text_background" />
+
+
+
+
+    <!-- Sekce tlačítek zarovnaných na střed -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Tlačítko Přidat aktivitu -->
+        <Button
+            android:id="@+id/activityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_button"
+            android:text="Přidat aktivitu"
+            android:textColor="#FFFFFF" />
+
+        <!-- Tlačítko Databáze koní -->
+        <Button
+            android:id="@+id/horsesDatabaseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_button"
+            android:text="Databáze koní"
+            android:textColor="#FFFFFF" />
+
+        <!-- Tlačítko Databáze uživatelů -->
+        <Button
+            android:id="@+id/usersDatabaseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_button"
+            android:text="Databáze uživatelů"
+            android:textColor="#FFFFFF" />
+
+        <!-- Tlačítko Celkového přehledu -->
+        <Button
+            android:id="@+id/overallDatabaseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_button"
+            android:text="Celkový přehled aktivit koní"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</RelativeLayout>

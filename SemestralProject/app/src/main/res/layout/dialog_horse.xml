@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="270dp"
+    android:background="@drawable/horse"
+    android:padding="20dp">
+
+    <!-- Textová zpráva -->
+
+    <!-- Tlačítko Zpět -->
+
+    <TextView
+        android:id="@+id/dialogMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:background="@color/white"
+        android:text="Vymazat tohoto koně?"
+        android:textColor="@android:color/black"
+        android:textSize="21sp" />
+
+    <Button
+        android:id="@+id/dialogBackButton"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/ic_back"
+        android:contentDescription="Zpět" />
+
+    <!-- Tlačítko Vymazat -->
+    <Button
+        android:id="@+id/dialogDeleteButton"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/ic_delete"
+        android:contentDescription="Vymazat" />
+
+</RelativeLayout>
